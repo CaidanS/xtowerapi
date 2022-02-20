@@ -7,14 +7,17 @@ Simple API backend to handle account balance management.
 * SQLite
 * SQLAlchemy
 * Flask
-* Marshmallow (although definitely implemented hackily)
 
 ## Installation
 ```
-$ git clone https://github.com/CaidanS/speth_xtower_proj.git
+$ git clone https://github.com/CaidanS/xtowerapi.git
 ```
-Make sure to install the relevant python packages listed in requirements.txt
-
+Virtual environment setup up to you but I did it as follows
+```
+$ python3 -m venv env
+$ source env/bin/activate
+$ pip install -r requirements.txt
+```
 ## Running the project
 ```
 $ python3 main.py
