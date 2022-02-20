@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse
 from flask import jsonify
 from datetime import datetime
 from models import db, ma, Account, BalanceHistory
+from ast import literal_eval
 
 # These exchange rates are just hardcoded from the current rates
 # but would be fairly straightforward to pull rates from some api whenever a user makes an exchange
@@ -203,3 +204,31 @@ class Exchange(Resource):
                  return {'message': f"recipient username '{args['username_to']}' not found"}, 404
         else:
             return {'message': f"sender username '{args['username_from']}' not found"}, 404
+
+class Balances(Resource):
+    '''
+    Resource to be called by the appropriate api request.
+
+    Accepts GET request to return the balance history of a specified username
+    
+    '''
+    def get(self):
+        
+        parser = reqparse.RequestParser()
+        parser.add_argument('username')
+        parser.add_argument('start_time', default=datetime.min)
+        parser.add_argument('end_time', default=datetime.now())
+        parser.add_argument('asset_types', default='("btc_balance" ,"eth_balance", "usd_balance")')
+
+        args = parser.parse_args()
+        
+        columns = ('transaction_date',) + literal_eval(args['asset_types'])
+        # Query balance history for records for user that match the time range
+        if BalanceHistory.query.filter_by(assoc_acct_id = args['username']).first() is not None:
+            balance_history_temp = db.session.query(BalanceHistory)\
+            .filter(BalanceHistory.assoc_acct_id == args['username'], BalanceHistory.transaction_date >= args['start_time'], BalanceHistory.transaction_date <= args['end_time'])
+            # Only return the coloumns that contain info on the requested asset types
+            BalanceHistory_schema = BalanceHistorySchema(many=True, only=(columns))
+            return {f"{args['username']}'s balance history":BalanceHistory_schema.dump(balance_history_temp)}, 200
+        else:
+            return {'message': f"sender balance history for username '{args['username']}' not found"}, 404

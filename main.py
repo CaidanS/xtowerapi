@@ -14,6 +14,7 @@ api.add_resource(Accounts, '/accounts')
 api.add_resource(Deposit, '/deposit')
 api.add_resource(Withdraw, '/withdraw')
 api.add_resource(Exchange, '/exchange')
+api.add_resource(Balances, '/balances')
 
 if __name__ == '__main__':
     # db.create_all() # Uncomment if database is deleted somehow
