@@ -33,3 +33,4 @@ class Accounts(Resource):
 
         accounts_list = jsonify(account_schema.dump(Account.query.all()))
         return accounts_list
+
