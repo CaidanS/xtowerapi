@@ -11,3 +11,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(thisdir, 'xt
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 api.add_resource(Accounts, '/accounts')
+api.add_resource(Deposit, '/deposit')
+
+if __name__ == '__main__':
+    # db.create_all() # Uncomment if database is deleted somehow
+    app.run(debug=True)
