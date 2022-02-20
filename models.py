@@ -7,6 +7,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 db = SQLAlchemy(app)
+ma = Marshmallow(app)
 
 class Account(db.Model):
     '''
