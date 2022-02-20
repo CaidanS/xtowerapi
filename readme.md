@@ -33,7 +33,7 @@ Perameters:
 Wget example: 
 
 ``` 
-wget -O - --post-data 'username=alice' http://127.0.0.1:5000/accounts
+wget -O - --post-data 'username=john' http://127.0.0.1:5000/accounts
 ```
 
 ### PUT `/deposit`
