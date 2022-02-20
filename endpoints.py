@@ -3,6 +3,17 @@ from flask import jsonify
 from datetime import datetime
 from models import db, ma, Account, BalanceHistory
 
+# Schemas for returning data to the requester (not very familar with Marshmallow, but this seems to work!)
+class AccountSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'username')
+
+class BalanceHistorySchema(ma.Schema):
+    class Meta:
+        fields = ('assoc_acct_id', 'transaction_date', 'btc_balance', 'usd_balance','eth_balance')
+
+account_schema = AccountSchema(many=True)
+
 class Accounts(Resource):
     '''
     Resource to be called by the appropriate api request
