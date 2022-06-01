@@ -27,7 +27,7 @@ $ python3 main.py
 There are several endpoints exposed at http://127.0.0.1:5000/. Requests should be sent with url encoding. 
 
 ### POST `/accounts`
-Perameters:
+Parameters:
 * username: username to create (string, required)
 
 Wget example: 
@@ -37,7 +37,7 @@ wget -O - --post-data 'username=john' http://127.0.0.1:5000/accounts
 ```
 
 ### PUT `/deposit`
-Perameters:
+Parameters:
 * username: username to deposit to (string, required)
 * asset_type: asset type to deposit (possible values: "eth", "btc", "usd", required)
 * asset_amount: amount to deposit (float, required)
@@ -49,7 +49,7 @@ wget -O - --method=PUT --body-data 'username=alice&asset_type=eth&asset_amount=1
 ```
 
 ### PUT `/withdraw`
-Perameters:
+Parameters:
 * username: username to withdraw from (string, required)
 * asset_type: asset type to withdraw (possible values: "eth", "btc", "usd", required)
 * asset_amount: amount to withdraw (float, required)
@@ -61,7 +61,7 @@ wget -O - --method=PUT --body-data 'username=alice&asset_type=eth&asset_amount=5
 ```
 
 ### PUT `/exchange`
-Perameters: 
+Parameters: 
 * username_from: username to withdraw from (string, required)
 * username_to: username to deposit to (string, required)
 * asset_type_from: asset type to withdraw (possible values: "eth", "btc", "usd", required)
@@ -75,7 +75,7 @@ wget -O - --method=PUT --body-data 'username_from=alice&username_to=bob&asset_ty
 ```
 
 ### GET `/balances`
-Perameters (must be passed as query string parameters)
+Parameters (must be passed as query string parameters)
 * username (string, required)
 * asset_types: asset types to retieve (tuple including one or more of "eth_balance", "btc_balance", and "usd_balance", optional, defaults to all)
 * start_time: earliest balance history item to include (string of datetime, optional, defaults to all transactions)
